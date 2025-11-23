@@ -1,7 +1,7 @@
 package com.dw.scm.product.entity;
 
 import com.dw.scm.common.entity.BaseEntity;
-import com.dw.scm.supplier.entity.Supplier;
+import com.dw.scm.vendor.entity.Vendor;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,9 +39,9 @@ public class Product extends BaseEntity {
     private String unit;
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "DEFAULT_SUPPLIER_ID")
+    @JoinColumn(name = "DEFAULT_VENDOR_ID")
     @Comment("기본 공급업체 ID (FK)")
-    private Supplier defaultSupplier;
+    private Vendor defaultVendor;
 
     @Column(name = "LEAD_TIME_DAYS")
     @Comment("기본 리드타임(일)")

@@ -1,9 +1,9 @@
-package com.dw.scm.supplier.service;
+package com.dw.scm.vendor.service;
 
 import com.dw.scm.dataimport.entity.ImportJob;
 import org.springframework.web.multipart.MultipartFile;
 
-public interface SupplierImportService {
+public interface VendorImportService {
     /**
      * 공급업체 데이터 파일을 시스템에 등록하고 비동기적으로 가져오기 프로세스를 시작합니다.
      *

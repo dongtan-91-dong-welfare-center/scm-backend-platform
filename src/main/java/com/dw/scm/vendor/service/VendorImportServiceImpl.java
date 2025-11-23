@@ -1,4 +1,4 @@
-package com.dw.scm.supplier.service;
+package com.dw.scm.vendor.service;
 
 import com.dw.scm.dataimport.entity.ImportJob;
 import com.dw.scm.dataimport.service.FileStorageService;
@@ -14,12 +14,12 @@ import java.nio.file.Path;
 
 @Service
 @RequiredArgsConstructor
-public class SupplierImportServiceImpl implements SupplierImportService {
+public class VendorImportServiceImpl implements VendorImportService {
 
     private final ImportFileValidator importFileValidator;
     private final FileStorageService fileStorageService;
     private final ImportJobService importJobService;
-    private final SupplierImportProcessor supplierImportProcessor;
+    private final VendorImportProcessor vendorImportProcessor;
 
     @Override
     @Transactional
@@ -44,7 +44,7 @@ public class SupplierImportServiceImpl implements SupplierImportService {
     public void processImport(Long jobId) {
         ImportJob job = importJobService.getJob(jobId);
         if (job != null) {
-            supplierImportProcessor.process(job);
+            vendorImportProcessor.process(job);
         }
     }
 }

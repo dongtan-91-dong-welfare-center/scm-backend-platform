@@ -1,9 +1,9 @@
-package com.dw.scm.supplier.service.parser;
+package com.dw.scm.vendor.service.parser;
 
 import com.dw.scm.common.exception.BusinessException;
 import com.dw.scm.common.exception.ErrorCode;
 import com.dw.scm.dataimport.entity.ImportJob;
-import com.dw.scm.dataimport.entity.StgSupplier;
+import com.dw.scm.dataimport.entity.StgVendor;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -17,10 +17,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SupplierExcelParser {
+public class VendorExcelParser {
 
-    public List<StgSupplier> parse(String filePath, ImportJob job) {
-        List<StgSupplier> stgSuppliers = new ArrayList<>();
+    public List<StgVendor> parse(String filePath, ImportJob job) {
+        List<StgVendor> stgVendors = new ArrayList<>();
         try (InputStream is = Files.newInputStream(Paths.get(filePath))) {
             Workbook workbook = WorkbookFactory.create(is);
             Sheet sheet = workbook.getSheetAt(0); // 첫 번째 시트를 가져옵니다.
@@ -29,17 +29,17 @@ public class SupplierExcelParser {
                 Row row = sheet.getRow(i);
                 if (row == null) continue;
 
-                StgSupplier stgSupplier = new StgSupplier();
-                stgSupplier.setImportJob(job);
-                stgSupplier.setRowNo(row.getRowNum());
-                stgSupplier.setSupplierCode(row.getCell(0) != null ? row.getCell(0).getStringCellValue() : null);
-                stgSupplier.setSupplierName(row.getCell(1) != null ? row.getCell(1).getStringCellValue() : null);
+                StgVendor stgVendor = new StgVendor();
+                stgVendor.setImportJob(job);
+                stgVendor.setRowNo(row.getRowNum());
+                stgVendor.setVendorCode(row.getCell(0) != null ? row.getCell(0).getStringCellValue() : null);
+                stgVendor.setVendorName(row.getCell(1) != null ? row.getCell(1).getStringCellValue() : null);
                 // ... 나머지 필드 파싱
-                stgSuppliers.add(stgSupplier);
+                stgVendors.add(stgVendor);
             }
         } catch (Exception e) {
             throw new BusinessException(ErrorCode.EXCEL_PARSING_FAILED);
         }
-        return stgSuppliers;
+        return stgVendors;
     }
 }

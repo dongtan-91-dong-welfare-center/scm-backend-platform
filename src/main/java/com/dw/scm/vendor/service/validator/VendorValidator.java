@@ -1,7 +1,7 @@
-package com.dw.scm.supplier.service.validator;
+package com.dw.scm.vendor.service.validator;
 
 import com.dw.scm.dataimport.entity.ImportStatus;
-import com.dw.scm.dataimport.entity.StgSupplier;
+import com.dw.scm.dataimport.entity.StgVendor;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -9,24 +9,24 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class SupplierValidator {
+public class VendorValidator {
 
     /**
      * 스테이징된 공급업체 데이터 목록을 검증합니다.
      *
-     * @param stgSuppliers 검증할 스테이징 공급업체 목록
+     * @param stgVendors 검증할 스테이징 공급업체 목록
      */
-    public void validate(List<StgSupplier> stgSuppliers) {
-        for (StgSupplier stgSupplier : stgSuppliers) {
+    public void validate(List<StgVendor> stgVendors) {
+        for (StgVendor stgVendor : stgVendors) {
             List<String> errors = new ArrayList<>();
 
             // 필수 값 검증: 공급업체 코드
-            if (!StringUtils.hasText(stgSupplier.getSupplierCode())) {
+            if (!StringUtils.hasText(stgVendor.getVendorCode())) {
                 errors.add("공급업체 코드는 필수입니다.");
             }
 
             // 필수 값 검증: 공급업체 이름
-            if (!StringUtils.hasText(stgSupplier.getSupplierName())) {
+            if (!StringUtils.hasText(stgVendor.getVendorName())) {
                 errors.add("공급업체 이름은 필수입니다.");
             }
 
@@ -34,10 +34,10 @@ public class SupplierValidator {
             // ...
 
             if (errors.isEmpty()) {
-                stgSupplier.setStatus(ImportStatus.VALID);
+                stgVendor.setStatus(ImportStatus.VALID);
             } else {
-                stgSupplier.setStatus(ImportStatus.INVALID);
-                stgSupplier.setErrorMessage(String.join(", ", errors));
+                stgVendor.setStatus(ImportStatus.INVALID);
+                stgVendor.setErrorMessage(String.join(", ", errors));
             }
         }
     }
